@@ -1,0 +1,93 @@
+{% extends 'base.html' %}
+{% load i18n static %}
+
+{% block title %}{{ product.name }} | {% trans "مصنع الدافنية" %}{% endblock %}
+
+{% block content %}
+<section class="py-24 bg-white dark:bg-background-dark">
+    <div class="container mx-auto px-4">
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-start">
+            <!-- Product Image -->
+            <div class="sticky top-32">
+                <div class="bg-gray-100 dark:bg-gray-900 rounded-3xl overflow-hidden shadow-2xl">
+                    {% if product.image %}
+                    <img src="{{ product.image.url }}" alt="{{ product.name }}"
+                        class="w-full object-cover aspect-square">
+                    {% else %}
+                    <div class="w-full aspect-square flex items-center justify-center text-8xl text-gray-300">
+                        <i class="ph-bold ph-package"></i>
+                    </div>
+                    {% endif %}
+                </div>
+            </div>
+
+            <!-- Product Info -->
+            <div class="space-y-12">
+                <nav class="flex text-sm font-black text-gray-500 gap-2 mb-8">
+                    <a href="{% url 'products:list' %}" class="hover:text-primary">{% trans "المنتجات" %}</a>
+                    <span>/</span>
+                    <span class="text-primary">{{ product.category.name }}</span>
+                </nav>
+
+                <div class="space-y-6">
+                    <h1 class="text-4xl md:text-6xl font-black text-gray-900 dark:text-white leading-tight">
+                        {{ product.name }}
+                    </h1>
+                    <div class="text-xl text-gray-600 dark:text-gray-400 leading-relaxed font-bold">
+                        {{ product.description|linebreaks }}
+                    </div>
+                </div>
+
+                {% if product.features %}
+                <div class="space-y-6">
+                    <h3 class="text-2xl font-black text-gray-900 dark:text-white">{% trans "المميزات الرئيسية" %}</h3>
+                    <ul class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        {% for feature in product.features.splitlines %}
+                        {% if feature %}
+                        <li class="flex items-center gap-3 text-gray-700 dark:text-gray-300 font-bold">
+                            <i class="ph-bold ph-check-circle text-primary text-xl"></i>
+                            <span>{{ feature }}</span>
+                        </li>
+                        {% endif %}
+                        {% endfor %}
+                    </ul>
+                </div>
+                {% endif %}
+
+                {% if product.specifications.all %}
+                <div class="space-y-6">
+                    <h3 class="text-2xl font-black text-gray-900 dark:text-white">{% trans "المواصفات الفنية" %}</h3>
+                    <div class="overflow-hidden rounded-2xl border border-gray-100 dark:border-gray-800">
+                        <table class="w-full text-right rtl:text-right ltr:text-left">
+                            <thead class="bg-gray-50 dark:bg-gray-950 font-black text-sm uppercase tracking-wider">
+                                <tr>
+                                    <th class="px-6 py-4">{% trans "الخاصية" %}</th>
+                                    <th class="px-6 py-4">{% trans "القيمة" %}</th>
+                                </tr>
+                            </thead>
+                            <tbody
+                                class="divide-y divide-gray-100 dark:divide-gray-800 text-gray-700 dark:text-gray-300 font-bold">
+                                {% for spec in product.specifications.all %}
+                                <tr class="hover:bg-gray-50 dark:hover:bg-gray-800/50 transition-colors">
+                                    <td class="px-6 py-4">{{ spec.key }}</td>
+                                    <td class="px-6 py-4 font-inter">{{ spec.value }}</td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                {% endif %}
+
+                <div class="pt-8">
+                    <a href="{% url 'core:contact' %}?product={{ product.slug }}"
+                        class="inline-flex items-center gap-3 px-10 py-5 bg-primary text-white font-black rounded-2xl shadow-2xl shadow-primary/30 hover:scale-105 transition-all">
+                        <i class="ph-bold ph-paper-plane-tilt"></i>
+                        <span>{% trans "طلب عرض سعر" %}</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

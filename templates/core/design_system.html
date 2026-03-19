@@ -1,0 +1,165 @@
+{% extends 'base.html' %}
+{% load i18n %}
+
+{% block title %}{% trans "Design System" %} | Aldafnia{% endblock %}
+
+{% block content %}
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
+    <header class="mb-20">
+        <h1 class="text-4xl md:text-6xl font-black mb-4">{% trans "Design System" %}</h1>
+        <p class="text-xl text-gray-500">{% trans "Foundations, components, and styles for Aldafnia Factory website." %}
+        </p>
+    </header>
+
+    <!-- Colors -->
+    <section class="mb-20">
+        <h2 class="text-2xl font-black mb-10 border-s-4 border-primary ps-4">{% trans "Color Palette" %}</h2>
+        <div class="grid grid-cols-2 md:grid-cols-5 gap-6">
+            <div class="space-y-4">
+                <div class="h-24 bg-primary rounded-2xl shadow-lg"></div>
+                <div>
+                    <p class="font-black">Primary (Blue)</p>
+                    <p class="text-xs text-gray-400 font-inter">#0054a6 / #3b82f6</p>
+                </div>
+            </div>
+            <div class="space-y-4">
+                <div class="h-24 bg-secondary rounded-2xl shadow-lg"></div>
+                <div>
+                    <p class="font-black">Secondary (Cyan)</p>
+                    <p class="text-xs text-gray-400 font-inter">#00aee6 / #06b6d4</p>
+                </div>
+            </div>
+            <div class="space-y-4">
+                <div
+                    class="h-24 bg-surface dark:bg-surface-dark rounded-2xl shadow-lg border border-gray-100 dark:border-gray-800">
+                </div>
+                <div>
+                    <p class="font-black">Surface</p>
+                    <p class="text-xs text-gray-400 font-inter">#ffffff / #1e293b</p>
+                </div>
+            </div>
+            <div class="space-y-4">
+                <div
+                    class="h-24 bg-background dark:bg-background-dark rounded-2xl shadow-lg border border-gray-100 dark:border-gray-800">
+                </div>
+                <div>
+                    <p class="font-black">Background</p>
+                    <p class="text-xs text-gray-400 font-inter">#f8f9fa / #0f172a</p>
+                </div>
+            </div>
+            <div class="space-y-4">
+                <div
+                    class="h-24 bg-text dark:bg-text-dark rounded-2xl shadow-lg border border-gray-100 dark:border-gray-800">
+                </div>
+                <div>
+                    <p class="font-black">Text</p>
+                    <p class="text-xs text-gray-400 font-inter">#1a202c / #e2e8f0</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Typography -->
+    <section class="mb-20">
+        <h2 class="text-2xl font-black mb-10 border-s-4 border-primary ps-4">{% trans "Typography" %}</h2>
+        <div class="space-y-12">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-4 items-center">
+                <p class="text-xs font-black uppercase tracking-widest text-gray-400">Heading 1</p>
+                <div class="col-span-3">
+                    <h1 class="text-5xl font-black">قوة في كل أنش - Strength in Every Inch</h1>
+                </div>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-4 items-center">
+                <p class="text-xs font-black uppercase tracking-widest text-gray-400">Heading 2</p>
+                <div class="col-span-3">
+                    <h2 class="text-3xl font-extrabold">الجودة والمتانة العالمية - International Quality</h2>
+                </div>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-4 items-center">
+                <p class="text-xs font-black uppercase tracking-widest text-gray-400">Body Text</p>
+                <div class="col-span-3">
+                    <p class="text-lg text-gray-500 leading-relaxed max-w-2xl">
+                        مصنع الدافنية للأنابيب هو الرائد في ليبيا في إنتاج أنابيب البولي إيثيلين عالي الكثافة بأحدث
+                        التقنيات العالمية. نحن نلتزم بأعلى معايير الجودة لضمان تقديم أفضل المنتجات لعملائنا.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Buttons -->
+    <section class="mb-20">
+        <h2 class="text-2xl font-black mb-10 border-s-4 border-primary ps-4">{% trans "Interactive Elements" %}</h2>
+        <div class="flex flex-wrap gap-8 items-center text-center">
+            <div class="space-y-4">
+                <button
+                    class="px-8 py-4 bg-primary text-white font-black rounded-xl shadow-lg shadow-primary/25 hover:scale-105 active:scale-95 transition-all">
+                    Primary Button
+                </button>
+                <p class="text-xs text-gray-400 font-inter">.bg-primary</p>
+            </div>
+            <div class="space-y-4">
+                <button
+                    class="px-8 py-4 bg-secondary text-white font-black rounded-xl shadow-lg shadow-secondary/25 hover:scale-105 active:scale-95 transition-all">
+                    Secondary Button
+                </button>
+                <p class="text-xs text-gray-400 font-inter">.bg-secondary</p>
+            </div>
+            <div class="space-y-4">
+                <button
+                    class="px-8 py-4 border-2 border-primary text-primary font-black rounded-xl hover:bg-primary/5 active:scale-95 transition-all">
+                    Outline Button
+                </button>
+                <p class="text-xs text-gray-400 font-inter">.border-primary</p>
+            </div>
+            <div class="space-y-4">
+                <button
+                    class="px-8 py-4 bg-gray-100 dark:bg-gray-800 font-bold rounded-xl hover:bg-gray-200 dark:hover:bg-gray-700 transition-all">
+                    Ghost Button
+                </button>
+                <p class="text-xs text-gray-400 font-inter">.bg-gray-100</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Cards -->
+    <section class="mb-20">
+        <h2 class="text-2xl font-black mb-10 border-s-4 border-primary ps-4">{% trans "Card Components" %}</h2>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div
+                class="bg-surface dark:bg-surface-dark p-8 rounded-3xl shadow-xl border border-gray-100 dark:border-gray-800 hover:-translate-y-2 transition-transform duration-300">
+                <div
+                    class="w-16 h-16 bg-primary/10 rounded-2xl flex items-center justify-center text-primary text-3xl mb-6">
+                    <i class="ph-bold ph-factory"></i>
+                </div>
+                <h3 class="text-xl font-black mb-4">إنتاجية عالية</h3>
+                <p class="text-gray-500 dark:text-gray-400 leading-relaxed">
+                    نستخدم أحدث خطوط الإنتاج الألمانية لضمان دقة لا مثيل لها في كل متر من الأنابيب.
+                </p>
+            </div>
+            <div
+                class="bg-surface dark:bg-surface-dark p-8 rounded-3xl shadow-xl border border-gray-100 dark:border-gray-800 hover:-translate-y-2 transition-transform duration-300">
+                <div
+                    class="w-16 h-16 bg-secondary/10 rounded-2xl flex items-center justify-center text-secondary text-3xl mb-6">
+                    <i class="ph-bold ph-shield-check"></i>
+                </div>
+                <h3 class="text-xl font-black mb-4">معايير ISO</h3>
+                <p class="text-gray-500 dark:text-gray-400 leading-relaxed">
+                    جميع منتجاتنا خاضعة لاختبارات دقيقة وتلبي اشتراطات الجودة العالمية والمحلية.
+                </p>
+            </div>
+            <div
+                class="bg-surface dark:bg-surface-dark p-8 rounded-3xl shadow-xl border border-gray-100 dark:border-gray-800 hover:-translate-y-2 transition-transform duration-300">
+                <div
+                    class="w-16 h-16 bg-blue-500/10 rounded-2xl flex items-center justify-center text-blue-500 text-3xl mb-6">
+                    <i class="ph-bold ph-planet"></i>
+                </div>
+                <h3 class="text-xl font-black mb-4">صديق للبيئة</h3>
+                <p class="text-gray-500 dark:text-gray-400 leading-relaxed">
+                    نلتزم بالاستدامة في عملياتنا الصناعية وتقليل البصمة الكربونية للإنتاج.
+                </p>
+            </div>
+        </div>
+    </section>
+</div>
+{% endblock %}

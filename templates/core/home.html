@@ -1,0 +1,89 @@
+{% extends 'base.html' %}
+{% load i18n static %}
+
+{% block content %}
+<!-- Hero Section -->
+<section class="relative h-screen flex items-center overflow-hidden">
+    <!-- Hero Image with Overlay -->
+    <div class="absolute inset-0 z-0">
+        <img src="{% static 'images/hero.png' %}" alt="Aldafnia Factory" class="w-full h-full object-cover">
+        <div
+            class="absolute inset-0 bg-gradient-to-r from-gray-950/90 via-gray-950/60 to-transparent rtl:bg-gradient-to-l transition-opacity duration-500">
+        </div>
+    </div>
+
+    <div class="container mx-auto px-4 sm:px-6 lg:px-8 relative z-20">
+        <div class="max-w-4xl space-y-8 animate-fade-in">
+            <div
+                class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/20 border border-primary/30 text-primary-dark backdrop-blur-md">
+                <span class="w-2 h-2 rounded-full bg-primary"></span>
+                <span class="text-sm font-black uppercase tracking-widest font-inter">
+                    {% blocktrans %}الريادة في صناعة الأنابيب{% endblocktrans %}
+                </span>
+            </div>
+            <h1 class="text-6xl md:text-8xl font-black text-white leading-tight">
+                <div class="drop-shadow-lg">
+                    {% blocktrans %}قوة تنبض بالدقة{% endblocktrans %}
+                </div>
+                <div class="text-secondary drop-shadow-md">
+                    {% blocktrans %}في كل بوصة{% endblocktrans %}
+                </div>
+            </h1>
+            <p class="text-xl text-gray-200 max-w-2xl leading-relaxed font-bold drop-shadow-md">
+                {% blocktrans %}
+                نحن في مصنع الدافنية نجمع بين التكنولوجيا الألمانية والخبرة المحلية لنقدم حلول الأنابيب الأكثر موثوقية
+                لمشاريع البنية التحتية والزراعة.
+                {% endblocktrans %}
+            </p>
+            <div class="flex flex-wrap gap-6 pt-4">
+                <a href="{% url 'products:list' %}"
+                    class="px-10 py-5 bg-primary text-white font-black rounded-2xl shadow-2xl shadow-primary/20 hover:scale-105 active:scale-95 transition-all flex items-center gap-3 group">
+                    <span>
+                        {% blocktrans %}استعرض منتجاتنا{% endblocktrans %}
+                    </span>
+                    <i
+                        class="ph-bold ph-arrow-left group-hover:-translate-x-1 transition-transform rtl:block hidden"></i>
+                    <i
+                        class="ph-bold ph-arrow-right group-hover:translate-x-1 transition-transform ltr:block hidden"></i>
+                </a>
+                <a href="{% url 'core:about' %}"
+                    class="px-10 py-5 bg-white/10 border border-white/20 text-white font-black rounded-2xl backdrop-blur-md hover:bg-white/20 transition-all">
+                    {% blocktrans %}عن المصنع{% endblocktrans %}
+                </a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Stats Section -->
+<section class="py-24 bg-white dark:bg-gray-950 transition-colors duration-300">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-12 text-center">
+            <div class="space-y-4">
+                <div class="text-5xl font-black text-primary font-inter">2006</div>
+                <p class="text-gray-500 font-bold">
+                    {% blocktrans %}تاريخ التأسيس{% endblocktrans %}
+                </p>
+            </div>
+            <div class="space-y-4">
+                <div class="text-5xl font-black text-primary font-inter">15+</div>
+                <p class="text-gray-500 font-bold">
+                    {% blocktrans %}خط إنتاج{% endblocktrans %}
+                </p>
+            </div>
+            <div class="space-y-4">
+                <div class="text-5xl font-black text-primary font-inter">5000+</div>
+                <p class="text-gray-500 font-bold">
+                    {% blocktrans %}طُـن سنوياً{% endblocktrans %}
+                </p>
+            </div>
+            <div class="space-y-4">
+                <div class="text-5xl font-black text-primary font-inter">100%</div>
+                <p class="text-gray-500 font-bold">
+                    {% blocktrans %}جودة ليبية{% endblocktrans %}
+                </p>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

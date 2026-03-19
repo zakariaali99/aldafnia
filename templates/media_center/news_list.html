@@ -1,0 +1,64 @@
+{% extends 'base.html' %}
+{% load i18n static %}
+
+{% block title %}{% trans "المركز الإعلامي | مصنع الدافنية" %}{% endblock %}
+
+{% block content %}
+<section class="py-20 bg-gray-950 text-white">
+    <div class="container mx-auto px-4">
+        <div class="flex flex-col md:flex-row justify-between items-end gap-8">
+            <div class="space-y-4">
+                <h1 class="text-5xl md:text-7xl font-black">{% trans "آخر الأخبار" %}</h1>
+                <p class="text-xl text-gray-400 font-bold">{% trans "تابعوا أحدث التطورات والفعاليات في مصنع الدافنية."
+                    %}</p>
+            </div>
+            <div class="flex gap-4">
+                <a href="{% url 'media_center:news_list' %}"
+                    class="px-6 py-3 bg-primary text-white font-black rounded-xl">{% trans "الأخبار" %}</a>
+                <a href="{% url 'media_center:certificates' %}"
+                    class="px-6 py-3 bg-white/10 text-white font-black rounded-xl hover:bg-white/20 transition-all">{%
+                    trans "الشهادات" %}</a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="py-24 bg-white dark:bg-background-dark">
+    <div class="container mx-auto px-4">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-12">
+            {% for article in articles %}
+            <article class="group">
+                <a href="{% url 'media_center:news_detail' article.slug %}" class="block space-y-6">
+                    <div class="aspect-video overflow-hidden rounded-3xl bg-gray-100 dark:bg-gray-800">
+                        {% if article.image %}
+                        <img src="{{ article.image.url }}" alt="{{ article.title }}"
+                            class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700">
+                        {% endif %}
+                    </div>
+                    <div class="space-y-4">
+                        <div class="text-sm font-black text-primary uppercase tracking-widest font-inter">{{
+                            article.published_date|date:"d M Y" }}</div>
+                        <h2
+                            class="text-3xl font-black text-gray-900 dark:text-white group-hover:text-primary transition-colors leading-tight">
+                            {{ article.title }}
+                        </h2>
+                        <p class="text-gray-500 dark:text-gray-400 text-lg line-clamp-2 leading-relaxed font-bold">
+                            {{ article.content|striptags }}
+                        </p>
+                        <div class="flex items-center gap-2 text-primary font-black text-sm uppercase tracking-widest">
+                            <span>{% trans "اقرأ المزيد" %}</span>
+                            <i
+                                class="ph-bold ph-arrow-right rtl:ph-arrow-left group-hover:translate-x-2 transition-transform"></i>
+                        </div>
+                    </div>
+                </a>
+            </article>
+            {% empty %}
+            <div class="col-span-full text-center py-20">
+                <p class="text-gray-500 font-bold">{% trans "لا توجد أخبار حالياً." %}</p>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+{% endblock %}

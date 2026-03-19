@@ -1,0 +1,60 @@
+{% extends 'base.html' %}
+{% load i18n static %}
+
+{% block title %}{% trans "مشاريعنا | مصنع الدافنية" %}{% endblock %}
+
+{% block content %}
+<section class="py-20 bg-gray-950 text-white text-center">
+    <div class="container mx-auto px-4">
+        <h1 class="text-5xl md:text-7xl font-black mb-6">{% trans "بصمتنا في كل مشروع" %}</h1>
+        <p class="text-xl text-gray-400 max-w-2xl mx-auto font-bold">{% trans "نفخر بالمشاركة في أضخم مشاريع البنية
+            التحتية والزراعة في ليبيا بمنتجات تضمن الاستدامة." %}</p>
+    </div>
+</section>
+
+<section class="py-24 bg-white dark:bg-background-dark">
+    <div class="container mx-auto px-4">
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {% for project in projects %}
+            <div class="group relative overflow-hidden rounded-3xl bg-gray-100 dark:bg-gray-800 aspect-[4/5]">
+                {% if project.image %}
+                <img src="{{ project.image.url }}" alt="{{ project.title }}"
+                    class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
+                {% else %}
+                <div class="w-full h-full flex items-center justify-center text-6xl text-gray-300">
+                    <i class="ph-bold ph-hard-hat"></i>
+                </div>
+                {% endif %}
+
+                <!-- Overlay -->
+                <div
+                    class="absolute inset-0 bg-gradient-to-t from-gray-950 via-gray-900/40 to-transparent opacity-90 transition-opacity">
+                </div>
+
+                <!-- Content -->
+                <div
+                    class="absolute inset-0 p-8 flex flex-col justify-end transform translate-y-4 group-hover:translate-y-0 transition-transform duration-500">
+                    <div class="inline-block px-3 py-1 bg-primary text-white text-xs font-black rounded-lg mb-4 w-fit">
+                        {{ project.year }}
+                    </div>
+                    <h3 class="text-2xl font-black text-white mb-2">{{ project.title }}</h3>
+                    <p
+                        class="text-gray-300 text-sm font-bold opacity-0 group-hover:opacity-100 transition-opacity duration-500 line-clamp-2">
+                        {{ project.description }}
+                    </p>
+                    <div class="mt-4 flex items-center gap-2 text-primary font-black uppercase tracking-widest text-xs">
+                        <i class="ph-bold ph-map-pin"></i>
+                        <span>{{ project.location }}</span>
+                    </div>
+                </div>
+            </div>
+            {% empty %}
+            <div class="col-span-full text-center py-20">
+                <i class="ph-bold ph-stack text-6xl text-gray-300 mb-6"></i>
+                <p class="text-gray-500 font-bold">{% trans "سيتم إضافة مشاريعنا قريباً." %}</p>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+{% endblock %}

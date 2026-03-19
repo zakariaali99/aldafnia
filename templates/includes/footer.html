@@ -1,0 +1,91 @@
+{% load i18n static %}
+<footer
+    class="bg-gray-50 dark:bg-gray-950 border-t border-gray-200 dark:border-gray-900 pt-16 pb-8 transition-colors duration-300">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-12 mb-12">
+            <div class="col-span-1 md:col-span-1">
+                <a href="{% url 'core:home' %}" class="flex items-center gap-3 mb-6 group">
+                    <img src="{% static 'images/logo.png' %}" alt="Aldafnia Logo" class="h-10 w-auto object-contain">
+                    <span
+                        class="text-xl font-extrabold tracking-tight text-primary dark:text-primary-dark font-almarai">
+                        الدافنية <span class="text-secondary dark:text-secondary-dark font-inter">ALDAFNIA</span>
+                    </span>
+                </a>
+                <p class="text-gray-500 dark:text-gray-400 text-sm leading-relaxed mb-6 font-cairo">
+                    {% blocktrans %}
+                    مصنع الدافنية للأنابيب هو الرائد في ليبيا في إنتاج أنابيب البولي إيثيلين عالي الكثافة (HDPE) بأحدث
+                    التقنيات العالمية.
+                    {% endblocktrans %}
+                </p>
+                <div class="flex space-x-4 rtl:space-x-reverse">
+                    <a href="#" class="text-gray-400 hover:text-primary transition-colors text-xl"><i
+                            class="ph-bold ph-facebook-logo"></i></a>
+                    <a href="#" class="text-gray-400 hover:text-primary transition-colors text-xl"><i
+                            class="ph-bold ph-linkedin-logo"></i></a>
+                    <a href="#" class="text-gray-400 hover:text-primary transition-colors text-xl"><i
+                            class="ph-bold ph-instagram-logo"></i></a>
+                </div>
+            </div>
+            <div>
+                <h4 class="text-sm font-black uppercase tracking-widest text-primary dark:text-primary-dark mb-6">
+                    {% blocktrans %}روابط سريعة{% endblocktrans %}
+                </h4>
+                <ul class="space-y-4 text-sm font-bold">
+                    <li><a href="{% url 'core:home' %}"
+                            class="text-gray-500 hover:text-primary dark:text-gray-400 dark:hover:text-primary-dark transition-colors">
+                            {% blocktrans %}الرئيسية{% endblocktrans %}
+                        </a></li>
+                    <li><a href="{% url 'products:list' %}"
+                            class="text-gray-500 hover:text-primary dark:text-gray-400 dark:hover:text-primary-dark transition-colors">
+                            {% blocktrans %}المنتجات{% endblocktrans %}
+                        </a></li>
+                    <li><a href="{% url 'core:about' %}"
+                            class="text-gray-500 hover:text-primary dark:text-gray-400 dark:hover:text-primary-dark transition-colors">
+                            {% blocktrans %}عن المصنع{% endblocktrans %}
+                        </a></li>
+                    <li><a href="{% url 'projects:list' %}"
+                            class="text-gray-500 hover:text-primary dark:text-gray-400 dark:hover:text-primary-dark transition-colors">
+                            {% blocktrans %}المشاريع{% endblocktrans %}
+                        </a></li>
+                </ul>
+            </div>
+            <div>
+                <h4 class="text-sm font-black uppercase tracking-widest text-primary dark:text-primary-dark mb-6">
+                    {% blocktrans %}منتجاتنا{% endblocktrans %}
+                </h4>
+                <ul class="space-y-4 text-sm font-bold">
+                    <li><a href="{% url 'products:list' %}"
+                            class="text-gray-500 hover:text-primary dark:text-gray-400 dark:hover:text-primary-dark transition-colors">
+                            {% blocktrans %}أنابيب HDPE{% endblocktrans %}
+                        </a></li>
+                    <li><a href="{% url 'products:list' %}"
+                            class="text-gray-500 hover:text-primary dark:text-gray-400 dark:hover:text-primary-dark transition-colors">
+                            {% blocktrans %}أنابيب ري بالتنقيط{% endblocktrans %}
+                        </a></li>
+                </ul>
+            </div>
+            <div>
+                <h4 class="text-sm font-black uppercase tracking-widest text-primary dark:text-primary-dark mb-6">
+                    {% blocktrans %}تواصل معنا{% endblocktrans %}
+                </h4>
+                <ul class="space-y-4 text-sm font-bold text-gray-500">
+                    <li class="flex items-start gap-3">
+                        <i class="ph-bold ph-map-pin text-primary text-xl"></i>
+                        <span>
+                            {% blocktrans %}مصراتة، ليبيا - منطقة الدافنية الصناعية{% endblocktrans %}
+                        </span>
+                    </li>
+                    <li class="flex items-center gap-3 font-inter">
+                        <i class="ph-bold ph-phone text-primary text-xl"></i>
+                        <span>+218 91 000 0000</span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div
+            class="border-t border-gray-200 dark:border-gray-900 pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
+            <p class="text-xs text-gray-500 dark:text-gray-400 font-inter">&copy; {% now "Y" %} ALDAFNIA FACTORY. ALL
+                RIGHTS RESERVED.</p>
+        </div>
+    </div>
+</footer>

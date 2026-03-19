@@ -1,0 +1,47 @@
+{% load i18n static %}
+<nav x-data="{ mobileMenuOpen: false, darkMode: localStorage.getItem('color-theme') === 'dark' }"
+    class="sticky top-0 z-50 bg-surface/80 dark:bg-surface-dark/80 backdrop-blur-md border-b border-gray-200 dark:border-gray-800 transition-all duration-300">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex justify-between h-20">
+            <div class="flex items-center">
+                <a href="{% url 'core:home' %}" class="flex-shrink-0 flex items-center gap-3 group">
+                    <img src="{% static 'images/logo.png' %}" alt="Aldafnia Logo"
+                        class="h-10 w-auto object-contain transition-transform group-hover:scale-110">
+                    <span
+                        class="text-xl font-extrabold tracking-tight text-primary dark:text-primary-dark font-almarai">
+                        الدافنية <span class="text-secondary dark:text-secondary-dark font-inter">ALDAFNIA</span>
+                    </span>
+                </a>
+                <div class="hidden md:flex md:ms-10 space-x-8 rtl:space-x-reverse">
+                    <a href="{% url 'core:home' %}"
+                        class="text-sm font-bold hover:text-primary dark:hover:text-primary-dark transition-colors">
+                        {% blocktrans %}الرئيسية{% endblocktrans %}
+                    </a>
+                    <a href="{% url 'products:list' %}"
+                        class="text-sm font-bold hover:text-primary dark:hover:text-primary-dark transition-colors">
+                        {% blocktrans %}المنتجات{% endblocktrans %}
+                    </a>
+                    <a href="{% url 'core:about' %}"
+                        class="text-sm font-bold hover:text-primary dark:hover:text-primary-dark transition-colors">
+                        {% blocktrans %}عن المصنع{% endblocktrans %}
+                    </a>
+                    <a href="{% url 'projects:list' %}"
+                        class="text-sm font-bold hover:text-primary dark:hover:text-primary-dark transition-colors">
+                        {% blocktrans %}المشاريع{% endblocktrans %}
+                    </a>
+                    <a href="{% url 'core:contact' %}"
+                        class="text-sm font-bold hover:text-primary dark:hover:text-primary-dark transition-colors">
+                        {% blocktrans %}تواصل معنا{% endblocktrans %}
+                    </a>
+                </div>
+            </div>
+            <div class="flex items-center gap-4">
+                <button
+                    @click="darkMode = !darkMode; darkMode ? document.documentElement.classList.add('dark') : document.documentElement.classList.remove('dark'); localStorage.setItem('color-theme', darkMode ? 'dark' : 'light')"
+                    class="p-2 rounded-full bg-gray-100 dark:bg-gray-800 text-gray-500 dark:text-yellow-400 hover:ring-2 hover:ring-primary transition-all">
+                    <i :class="darkMode ? 'ph-bold ph-sun' : 'ph-bold ph-moon'"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+</nav>
