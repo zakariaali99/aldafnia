@@ -5,6 +5,8 @@ class NewsListView(ListView):
     model = NewsArticle
     template_name = 'media_center/news_list.html'
     context_object_name = 'articles'
+    paginate_by = 10
+    ordering = ['-published_date']
 
 class NewsDetailView(DetailView):
     model = NewsArticle
@@ -15,3 +17,4 @@ class CertificateListView(ListView):
     model = Certificate
     template_name = 'media_center/certificates.html'
     context_object_name = 'certificates'
+    paginate_by = 12

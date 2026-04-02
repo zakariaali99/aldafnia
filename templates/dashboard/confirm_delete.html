@@ -1,0 +1,36 @@
+{% extends 'dashboard/base.html' %}
+{% load i18n static %}
+
+{% block title %}تأكيد الحذف{% endblock %}
+{% block page_title %}تأكيد الحذف{% endblock %}
+
+{% block dashboard_content %}
+
+<div class="max-w-2xl mx-auto py-12">
+    <div class="p-12 bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-800 rounded-3xl shadow-xl shadow-red-500/5 text-center">
+        <div class="w-24 h-24 rounded-3xl bg-red-100 text-red-600 dark:bg-red-900/10 dark:text-red-400 flex items-center justify-center mx-auto mb-8 transition-transform group-hover:scale-110">
+            <i class="ph-bold ph-warning-circle text-5xl"></i>
+        </div>
+        
+        <h3 class="text-3xl font-black mb-4">هل أنت متأكد؟</h3>
+        <p class="text-gray-500 dark:text-gray-400 font-bold mb-10 leading-relaxed">
+            أنت على وشك حذف المخطط التالي: <br>
+            <span class="text-primary mt-2 block select-all">"{{ object }}"</span> <br>
+            هذا الإجراء لا يمكن التراجع عنه.
+        </p>
+
+        <form method="post" class="flex flex-col sm:flex-row items-center justify-center gap-4">
+            {% csrf_token %}
+            <button type="submit" class="w-full sm:w-auto px-10 py-5 rounded-2xl bg-red-500 text-white font-black hover:bg-red-600 shadow-xl shadow-red-500/20 active:scale-95 transition-all flex items-center justify-center gap-3">
+                <i class="ph-bold ph-trash text-xl"></i>
+                <span>تأكيد الحذف النهائي</span>
+            </button>
+            <a href="{% url cancel_url %}" class="w-full sm:w-auto px-10 py-5 rounded-2xl bg-gray-100 dark:bg-gray-800 text-gray-500 dark:text-gray-100 font-black hover:bg-gray-200 dark:hover:bg-gray-700 active:scale-95 transition-all flex items-center justify-center gap-3">
+                <i class="ph-bold ph-arrow-right text-xl"></i>
+                <span>تراجع وإلغاء العملية</span>
+            </a>
+        </form>
+    </div>
+</div>
+
+{% endblock %}

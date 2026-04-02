@@ -1,15 +1,20 @@
 {% extends 'base.html' %}
 {% load i18n static %}
 
-{% block title %}{% trans "تواصل معنا | مصنع الدافنية" %}{% endblock %}
+{% block title %}
+{% blocktrans %}تواصل معنا | مصنع الدافنية{% endblocktrans %}
+{% endblock %}
 
 {% block content %}
 <!-- Page Header -->
 <section class="py-20 bg-gray-950 text-white text-center">
     <div class="container mx-auto px-4">
-        <h1 class="text-5xl md:text-7xl font-black mb-6">{% trans "نحن هنا لخدمتكم" %}</h1>
-        <p class="text-xl text-gray-400 max-w-2xl mx-auto font-bold">{% trans "تواصل معنا للحصول على عروض الأسعار أو
-            الاستفسارات الفنية حول منتجاتنا." %}</p>
+        <h1 class="text-5xl md:text-7xl font-black mb-6">
+            {% blocktrans %}نحن هنا لخدمتكم{% endblocktrans %}
+        </h1>
+        <p class="text-xl text-gray-400 max-w-2xl mx-auto font-bold">
+            {% blocktrans %}تواصل معنا للحصول على عروض الأسعار أو الاستفسارات الفنية حول منتجاتنا.{% endblocktrans %}
+        </p>
     </div>
 </section>
 
@@ -20,41 +25,57 @@
             <!-- Contact Form -->
             <div
                 class="bg-gray-50 dark:bg-gray-900 rounded-3xl p-8 md:p-12 shadow-sm border border-gray-100 dark:border-gray-800">
-                <h2 class="text-3xl font-black text-gray-900 dark:text-white mb-8">{% trans "أرسل لنا رسالة" %}</h2>
-                <form action="#" method="POST" class="space-y-6">
+                <h2 class="text-3xl font-black text-gray-900 dark:text-white mb-8">
+                    {% blocktrans %}أرسل لنا رسالة{% endblocktrans %}
+                </h2>
+                {% if messages %}
+                <div class="mb-8 space-y-4">
+                    {% for message in messages %}
+                    <div
+                        class="p-4 rounded-xl {% if message.tags == 'success' %}bg-green-100 text-green-700{% else %}bg-red-100 text-red-700{% endif %} font-bold">
+                        {{ message }}
+                    </div>
+                    {% endfor %}
+                </div>
+                {% endif %}
+                <form action="{% url 'core:contact' %}" method="POST" class="space-y-6">
                     {% csrf_token %}
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                         <div class="space-y-2">
-                            <label
-                                class="text-sm font-black text-gray-700 dark:text-gray-300 uppercase tracking-wider">{%
-                                trans "الاسم الكامل" %}</label>
+                            <label class="text-sm font-black text-gray-700 dark:text-gray-300 uppercase tracking-wider">
+                                {% blocktrans %}الاسم الكامل{% endblocktrans %}
+                            </label>
                             <input type="text" name="name" required
                                 class="w-full px-6 py-4 rounded-xl bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 focus:ring-2 focus:ring-primary focus:border-transparent transition-all">
                         </div>
                         <div class="space-y-2">
-                            <label
-                                class="text-sm font-black text-gray-700 dark:text-gray-300 uppercase tracking-wider">{%
-                                trans "البريد الإلكتروني" %}</label>
+                            <label class="text-sm font-black text-gray-700 dark:text-gray-300 uppercase tracking-wider">
+                                {% blocktrans %}البريد الإلكتروني{% endblocktrans %}
+                            </label>
                             <input type="email" name="email" required
                                 class="w-full px-6 py-4 rounded-xl bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 focus:ring-2 focus:ring-primary focus:border-transparent transition-all font-inter">
                         </div>
                     </div>
                     <div class="space-y-2">
-                        <label class="text-sm font-black text-gray-700 dark:text-gray-300 uppercase tracking-wider">{%
-                            trans "الموضوع" %}</label>
+                        <label class="text-sm font-black text-gray-700 dark:text-gray-300 uppercase tracking-wider">
+                            {% blocktrans %}الموضوع{% endblocktrans %}
+                        </label>
                         <input type="text" name="subject" required
                             class="w-full px-6 py-4 rounded-xl bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 focus:ring-2 focus:ring-primary focus:border-transparent transition-all">
                     </div>
                     <div class="space-y-2">
-                        <label class="text-sm font-black text-gray-700 dark:text-gray-300 uppercase tracking-wider">{%
-                            trans "الرسالة" %}</label>
+                        <label class="text-sm font-black text-gray-700 dark:text-gray-300 uppercase tracking-wider">
+                            {% blocktrans %}الرسالة{% endblocktrans %}
+                        </label>
                         <textarea name="message" rows="5" required
                             class="w-full px-6 py-4 rounded-xl bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 focus:ring-2 focus:ring-primary focus:border-transparent transition-all"></textarea>
                     </div>
                     <button type="submit"
                         class="w-full py-5 bg-primary text-white font-black rounded-xl hover:bg-primary/90 hover:scale-[1.02] shadow-xl shadow-primary/20 transition-all flex items-center justify-center gap-3">
                         <i class="ph-bold ph-paper-plane-tilt"></i>
-                        <span>{% trans "إرسال الرسالة" %}</span>
+                        <span>
+                            {% blocktrans %}إرسال الرسالة{% endblocktrans %}
+                        </span>
                     </button>
                 </form>
             </div>
@@ -62,24 +83,29 @@
             <!-- Contact Info -->
             <div class="space-y-12">
                 <div>
-                    <h2 class="text-3xl font-black text-gray-900 dark:text-white mb-8">{% trans "مكاتبنا وفروعنا" %}
+                    <h2 class="text-3xl font-black text-gray-900 dark:text-white mb-8">
+                        {% blocktrans %}مكاتبنا وفروعنا{% endblocktrans %}
                     </h2>
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
                         <!-- Tripoli -->
                         <div class="space-y-4">
                             <div class="flex items-center gap-3 text-primary">
                                 <i class="ph-fill ph-buildings text-3xl"></i>
-                                <h3 class="text-xl font-black">{% trans "مدينة طرابلس" %}</h3>
+                                <h3 class="text-xl font-black">
+                                    {% blocktrans %}مدينة طرابلس{% endblocktrans %}
+                                </h3>
                             </div>
                             <div class="space-y-4 text-sm font-bold text-gray-600 dark:text-gray-400">
                                 <div class="bg-gray-50 dark:bg-gray-900 p-4 rounded-xl">
-                                    <p class="mb-2 text-gray-900 dark:text-white">{% trans "مركز مبيعات 1 | طريق الدعوة
-                                        الإسلامية" %}</p>
+                                    <p class="mb-2 text-gray-900 dark:text-white">
+                                        {% blocktrans %}مركز مبيعات 1 | طريق الدعوة الإسلامية{% endblocktrans %}
+                                    </p>
                                     <p class="font-inter">091-3241428 / 091-3591021</p>
                                 </div>
                                 <div class="bg-gray-50 dark:bg-gray-900 p-4 rounded-xl">
-                                    <p class="mb-2 text-gray-900 dark:text-white">{% trans "مركز مبيعات 2 | طريق
-                                        السواني" %}</p>
+                                    <p class="mb-2 text-gray-900 dark:text-white">
+                                        {% blocktrans %}مركز مبيعات 2 | طريق السواني{% endblocktrans %}
+                                    </p>
                                     <p class="font-inter text-xs">092-6160178 / 091-8070400 / 091-6602222</p>
                                 </div>
                             </div>
@@ -89,17 +115,21 @@
                         <div class="space-y-4">
                             <div class="flex items-center gap-3 text-secondary">
                                 <i class="ph-fill ph-factory text-3xl"></i>
-                                <h3 class="text-xl font-black">{% trans "مدينة مصراتة" %}</h3>
+                                <h3 class="text-xl font-black">
+                                    {% blocktrans %}مدينة مصراتة{% endblocktrans %}
+                                </h3>
                             </div>
                             <div class="space-y-4 text-sm font-bold text-gray-600 dark:text-gray-400">
                                 <div class="bg-gray-50 dark:bg-gray-900 p-4 rounded-xl">
-                                    <p class="mb-2 text-gray-900 dark:text-white">{% trans "مركز مبيعات 1 | الطريق
-                                        الدائري الرابع" %}</p>
+                                    <p class="mb-2 text-gray-900 dark:text-white">
+                                        {% blocktrans %}مركز مبيعات 1 | الطريق الدائري الرابع{% endblocktrans %}
+                                    </p>
                                     <p class="font-inter">091-3241640 / 091-1130033</p>
                                 </div>
                                 <div class="bg-gray-50 dark:bg-gray-900 p-4 rounded-xl">
-                                    <p class="mb-2 text-gray-900 dark:text-white">{% trans "مركز مبيعات 2 | طريق
-                                        المجمدات" %}</p>
+                                    <p class="mb-2 text-gray-900 dark:text-white">
+                                        {% blocktrans %}مركز مبيعات 2 | طريق المجمدات{% endblocktrans %}
+                                    </p>
                                     <p class="font-inter">091-3865500 / 091-3864400</p>
                                 </div>
                             </div>
@@ -111,23 +141,28 @@
                 <div class="p-8 bg-primary rounded-3xl text-white">
                     <div class="flex items-center gap-4 mb-6">
                         <i class="ph-fill ph-info text-4xl"></i>
-                        <h3 class="text-2xl font-black">{% trans "مركز خدمة العملاء" %}</h3>
+                        <h3 class="text-2xl font-black">
+                            {% blocktrans %}مركز خدمة العملاء{% endblocktrans %}
+                        </h3>
                     </div>
                     <p class="text-primary-dark font-bold leading-relaxed mb-6">
-                        {% trans "نحن فخورون بخدمتكم في جميع أنحاء ليبيا. تتوفر لدينا أطقم فنية لتقديم الاستشارات بمواقع
-                        المشاريع مجاناً." %}
+                        {% blocktrans %}نحن فخورون بخدمتكم في جميع أنحاء ليبيا. تتوفر لدينا أطقم فنية لتقديم الاستشارات
+                        بمواقع المشاريع مجاناً.{% endblocktrans %}
                     </p>
                     <div class="flex items-center gap-4">
                         <div class="flex -space-x-3 rtl:space-x-reverse">
                             <div
                                 class="w-10 h-10 rounded-full bg-white/20 border-2 border-primary flex items-center justify-center backdrop-blur-sm">
-                                <i class="ph-bold ph-phone"></i></div>
+                                <i class="ph-bold ph-phone"></i>
+                            </div>
                             <div
                                 class="w-10 h-10 rounded-full bg-white/20 border-2 border-primary flex items-center justify-center backdrop-blur-sm">
-                                <i class="ph-bold ph-whatsapp-logo"></i></div>
+                                <i class="ph-bold ph-whatsapp-logo"></i>
+                            </div>
                             <div
                                 class="w-10 h-10 rounded-full bg-white/20 border-2 border-primary flex items-center justify-center backdrop-blur-sm">
-                                <i class="ph-bold ph-envelope"></i></div>
+                                <i class="ph-bold ph-envelope"></i>
+                            </div>
                         </div>
                         <span class="font-black font-inter tracking-widest">info@aldafnia.ly</span>
                     </div>

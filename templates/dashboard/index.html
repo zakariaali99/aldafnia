@@ -1,0 +1,133 @@
+{% extends 'dashboard/base.html' %}
+{% load i18n static %}
+
+{% block title %}الرئيسية{% endblock %}
+{% block page_title %}نظرة عامة{% endblock %}
+
+{% block dashboard_content %}
+
+<!-- Summary Stats -->
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
+    <!-- Categories Stat -->
+    <div class="p-8 bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-800 rounded-3xl shadow-sm hover:shadow-xl hover:shadow-primary/5 transition-all group">
+        <div class="flex items-center justify-between mb-4">
+            <div class="w-14 h-14 rounded-2xl bg-blue-50 text-blue-600 dark:bg-blue-900/10 dark:text-blue-400 flex items-center justify-center transition-transform group-hover:scale-110">
+                <i class="ph-bold ph-circles-four text-2xl"></i>
+            </div>
+            <span class="text-[10px] font-black uppercase tracking-widest text-primary font-inter">Categories</span>
+        </div>
+        <div class="text-4xl font-black text-gray-900 dark:text-gray-100 font-inter">{{ stats.categories }}</div>
+        <p class="text-gray-400 dark:text-gray-500 text-sm font-bold mt-2">الأقسام والأنواع</p>
+    </div>
+
+    <!-- Products Stat -->
+    <div class="p-8 bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-800 rounded-3xl shadow-sm hover:shadow-xl hover:shadow-primary/5 transition-all group">
+        <div class="flex items-center justify-between mb-4">
+            <div class="w-14 h-14 rounded-2xl bg-indigo-50 text-indigo-600 dark:bg-indigo-900/10 dark:text-indigo-400 flex items-center justify-center transition-transform group-hover:scale-110">
+                <i class="ph-bold ph-package text-2xl"></i>
+            </div>
+            <span class="text-[10px] font-black uppercase tracking-widest text-primary font-inter">Products</span>
+        </div>
+        <div class="text-4xl font-black text-gray-900 dark:text-gray-100 font-inter">{{ stats.products }}</div>
+        <p class="text-gray-400 dark:text-gray-500 text-sm font-bold mt-2">إجمالي المنتجات</p>
+    </div>
+
+    <!-- Projects Stat -->
+    <div class="p-8 bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-800 rounded-3xl shadow-sm hover:shadow-xl hover:shadow-primary/5 transition-all group">
+        <div class="flex items-center justify-between mb-4">
+            <div class="w-14 h-14 rounded-2xl bg-emerald-50 text-emerald-600 dark:bg-emerald-900/10 dark:text-emerald-400 flex items-center justify-center transition-transform group-hover:scale-110">
+                <i class="ph-bold ph-buildings text-2xl"></i>
+            </div>
+            <span class="text-[10px] font-black uppercase tracking-widest text-primary font-inter">Projects</span>
+        </div>
+        <div class="text-4xl font-black text-gray-900 dark:text-gray-100 font-inter">{{ stats.projects }}</div>
+        <p class="text-gray-400 dark:text-gray-500 text-sm font-bold mt-2">المشاريع المنجزة</p>
+    </div>
+
+    <!-- Messages Stat -->
+    <div class="p-8 bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-800 rounded-3xl shadow-sm hover:shadow-xl hover:shadow-primary/5 transition-all group">
+        <div class="flex items-center justify-between mb-4">
+            <div class="w-14 h-14 rounded-2xl bg-amber-50 text-amber-600 dark:bg-amber-900/10 dark:text-amber-400 flex items-center justify-center transition-transform group-hover:scale-110">
+                <i class="ph-bold ph-envelope-simple text-2xl"></i>
+            </div>
+            <span class="text-[10px] font-black uppercase tracking-widest text-primary font-inter">Messages</span>
+        </div>
+        <div class="text-4xl font-black text-gray-900 dark:text-gray-100 font-inter">{{ stats.messages }}</div>
+        <p class="text-gray-400 dark:text-gray-500 text-sm font-bold mt-2">رسائل التواصل</p>
+    </div>
+</div>
+
+<div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+    
+    <!-- Recent Messages -->
+    <div class="bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-800 rounded-3xl p-8 shadow-sm">
+        <div class="flex items-center justify-between mb-8">
+            <h3 class="text-xl font-black">آخر الرسائل</h3>
+            <a href="{% url 'dashboard:message_list' %}" class="text-primary hover:text-secondary transition-colors font-bold text-sm">شاهد الكل <i class="ph-bold ph-arrow-left ms-2 align-middle"></i></a>
+        </div>
+        
+        {% if recent_messages %}
+        <div class="space-y-4">
+            {% for msg in recent_messages %}
+            <div class="p-5 bg-gray-50 dark:bg-gray-800/50 rounded-2xl border border-gray-100 dark:border-gray-800 flex items-center justify-between group transition-all hover:bg-white dark:hover:bg-gray-800 hover:shadow-lg">
+                <div class="flex items-center gap-4">
+                    <div class="w-12 h-12 rounded-xl bg-primary/10 text-primary flex items-center justify-center group-hover:bg-primary group-hover:text-white transition-all">
+                        <i class="ph-bold ph-user text-xl"></i>
+                    </div>
+                    <div>
+                        <p class="font-black text-gray-900 dark:text-gray-100">{{ msg.name }}</p>
+                        <p class="text-xs text-gray-500 dark:text-gray-400 font-bold mt-1">{{ msg.subject|truncatechars:40 }}</p>
+                    </div>
+                </div>
+                <div class="flex flex-col items-end gap-1">
+                    <span class="text-[10px] font-black text-gray-400 font-inter">{{ msg.created_at|date:"Y-m-d H:i" }}</span>
+                    <a href="{% url 'dashboard:message_detail' msg.pk %}" class="p-2 rounded-lg text-primary hover:bg-primary/10 transition-all shadow-sm group-hover:shadow-md">
+                        <i class="ph-bold ph-eye text-xl"></i>
+                    </a>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+        {% else %}
+        <p class="text-gray-500 font-bold text-center py-8">لا يوجد رسائل تواصل حالياً.</p>
+        {% endif %}
+    </div>
+
+    <!-- Recent News -->
+    <div class="bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-800 rounded-3xl p-8 shadow-sm">
+        <div class="flex items-center justify-between mb-8">
+            <h3 class="text-xl font-black">آخر الأخبار</h3>
+            <a href="{% url 'dashboard:news_list' %}" class="text-primary hover:text-secondary transition-colors font-bold text-sm">شاهد الكل <i class="ph-bold ph-arrow-left ms-2 align-middle"></i></a>
+        </div>
+        
+        {% if recent_news %}
+        <div class="space-y-4">
+            {% for item in recent_news %}
+            <div class="p-5 bg-gray-50 dark:bg-gray-800/50 rounded-2xl border border-gray-100 dark:border-gray-800 flex items-center justify-between group transition-all hover:bg-white dark:hover:bg-gray-800 hover:shadow-lg">
+                <div class="flex items-center gap-4">
+                    {% if item.image %}
+                    <img src="{{ item.image.url }}" alt="News" class="w-12 h-12 rounded-xl object-cover">
+                    {% else %}
+                    <div class="w-12 h-12 rounded-xl bg-primary/10 text-primary flex items-center justify-center">
+                        <i class="ph-bold ph-newspaper text-xl"></i>
+                    </div>
+                    {% endif %}
+                    <div>
+                        <p class="font-black text-gray-900 dark:text-gray-100">{{ item.title|truncatechars:40 }}</p>
+                        <p class="text-[10px] font-black tracking-widest text-primary font-inter uppercase mt-1">{{ item.published_date }}</p>
+                    </div>
+                </div>
+                <a href="{% url 'dashboard:news_update' item.pk %}" class="p-2.5 rounded-xl text-gray-500 hover:bg-gray-100 dark:hover:bg-gray-800 hover:text-primary transition-all">
+                    <i class="ph-bold ph-pencil-simple text-xl"></i>
+                </a>
+            </div>
+            {% endfor %}
+        </div>
+        {% else %}
+        <p class="text-gray-500 font-bold text-center py-8">لا يوجد أخبار مضافة حتى الآن.</p>
+        {% endif %}
+    </div>
+
+</div>
+
+{% endblock %}

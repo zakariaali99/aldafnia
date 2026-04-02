@@ -1,23 +1,31 @@
 {% extends 'base.html' %}
 {% load i18n static %}
 
-{% block title %}{% trans "المركز الإعلامي | مصنع الدافنية" %}{% endblock %}
+{% block title %}
+{% blocktrans %}المركز الإعلامي | مصنع الدافنية{% endblocktrans %}
+{% endblock %}
 
 {% block content %}
 <section class="py-20 bg-gray-950 text-white">
     <div class="container mx-auto px-4">
         <div class="flex flex-col md:flex-row justify-between items-end gap-8">
             <div class="space-y-4">
-                <h1 class="text-5xl md:text-7xl font-black">{% trans "آخر الأخبار" %}</h1>
-                <p class="text-xl text-gray-400 font-bold">{% trans "تابعوا أحدث التطورات والفعاليات في مصنع الدافنية."
-                    %}</p>
+                <h1 class="text-5xl md:text-7xl font-black">
+                    {% blocktrans %}آخر الأخبار{% endblocktrans %}
+                </h1>
+                <p class="text-xl text-gray-400 font-bold">
+                    {% blocktrans %}تابعوا أحدث التطورات والفعاليات في مصنع الدافنية.{% endblocktrans %}
+                </p>
             </div>
             <div class="flex gap-4">
                 <a href="{% url 'media_center:news_list' %}"
-                    class="px-6 py-3 bg-primary text-white font-black rounded-xl">{% trans "الأخبار" %}</a>
+                    class="px-6 py-3 bg-primary text-white font-black rounded-xl">
+                    {% blocktrans %}الأخبار{% endblocktrans %}
+                </a>
                 <a href="{% url 'media_center:certificates' %}"
-                    class="px-6 py-3 bg-white/10 text-white font-black rounded-xl hover:bg-white/20 transition-all">{%
-                    trans "الشهادات" %}</a>
+                    class="px-6 py-3 bg-white/10 text-white font-black rounded-xl hover:bg-white/20 transition-all">
+                    {% blocktrans %}الشهادات{% endblocktrans %}
+                </a>
             </div>
         </div>
     </div>
@@ -36,8 +44,9 @@
                         {% endif %}
                     </div>
                     <div class="space-y-4">
-                        <div class="text-sm font-black text-primary uppercase tracking-widest font-inter">{{
-                            article.published_date|date:"d M Y" }}</div>
+                        <div class="text-sm font-black text-primary uppercase tracking-widest font-inter">
+                            {{ article.published_date|date:"d M Y" }}
+                        </div>
                         <h2
                             class="text-3xl font-black text-gray-900 dark:text-white group-hover:text-primary transition-colors leading-tight">
                             {{ article.title }}
@@ -46,7 +55,9 @@
                             {{ article.content|striptags }}
                         </p>
                         <div class="flex items-center gap-2 text-primary font-black text-sm uppercase tracking-widest">
-                            <span>{% trans "اقرأ المزيد" %}</span>
+                            <span>
+                                {% blocktrans %}اقرأ المزيد{% endblocktrans %}
+                            </span>
                             <i
                                 class="ph-bold ph-arrow-right rtl:ph-arrow-left group-hover:translate-x-2 transition-transform"></i>
                         </div>
@@ -55,10 +66,47 @@
             </article>
             {% empty %}
             <div class="col-span-full text-center py-20">
-                <p class="text-gray-500 font-bold">{% trans "لا توجد أخبار حالياً." %}</p>
+                <p class="text-gray-500 font-bold">
+                    {% blocktrans %}لا توجد أخبار حالياً.{% endblocktrans %}
+                </p>
             </div>
             {% endfor %}
         </div>
+
+        <!-- Pagination -->
+        {% if is_paginated %}
+        <div class="mt-20 flex justify-center gap-4">
+            {% if page_obj.has_previous %}
+            <a href="?page={{ page_obj.previous_page_number }}"
+                class="w-12 h-12 flex items-center justify-center rounded-xl border border-gray-200 dark:border-gray-800 hover:bg-primary hover:border-primary hover:text-white transition-all">
+                <i class="ph-bold ph-caret-left rtl:ph-caret-right"></i>
+            </a>
+            {% endif %}
+
+            <div class="flex items-center gap-2">
+                {% for i in paginator.page_range %}
+                {% if page_obj.number == i %}
+                <span
+                    class="w-12 h-12 flex items-center justify-center rounded-xl bg-primary text-white font-black hover:scale-105 transition-all">
+                    {{ i }}
+                </span>
+                {% else %}
+                <a href="?page={{ i }}"
+                    class="w-12 h-12 flex items-center justify-center rounded-xl border border-gray-200 dark:border-gray-800 hover:bg-primary hover:border-primary hover:text-white transition-all font-bold">
+                    {{ i }}
+                </a>
+                {% endif %}
+                {% endfor %}
+            </div>
+
+            {% if page_obj.has_next %}
+            <a href="?page={{ page_obj.next_page_number }}"
+                class="w-12 h-12 flex items-center justify-center rounded-xl border border-gray-200 dark:border-gray-800 hover:bg-primary hover:border-primary hover:text-white transition-all">
+                <i class="ph-bold ph-caret-right rtl:ph-caret-left"></i>
+            </a>
+            {% endif %}
+        </div>
+        {% endif %}
     </div>
 </section>
 {% endblock %}

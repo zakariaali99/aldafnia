@@ -1,14 +1,20 @@
 {% extends 'base.html' %}
 {% load i18n static %}
 
-{% block title %}{% trans "منتجاتنا | مصنع الدافنية" %}{% endblock %}
+{% block title %}
+{% blocktrans %}منتجاتنا | مصنع الدافنية{% endblocktrans %}
+{% endblock %}
 
 {% block content %}
 <!-- Header -->
 <section class="py-20 bg-gray-950 text-white">
     <div class="container mx-auto px-4 text-center">
-        <h1 class="text-5xl font-black mb-4">{% trans "منتجاتنا عالية الجودة" %}</h1>
-        <p class="text-gray-400 font-bold">{% trans "حلول أنابيب HDPE المتكاملة لمختلف التطبيقات" %}</p>
+        <h1 class="text-5xl font-black mb-4">
+            {% blocktrans %}منتجاتنا عالية الجودة{% endblocktrans %}
+        </h1>
+        <p class="text-gray-400 font-bold">
+            {% blocktrans %}حلول أنابيب HDPE المتكاملة لمختلف التطبيقات{% endblocktrans %}
+        </p>
     </div>
 </section>
 
@@ -48,24 +54,64 @@
                             {{ product.description }}
                         </p>
                         <div class="flex items-center justify-between">
-                            <span class="text-xs font-black uppercase tracking-widest text-primary">{% trans "عرض
-                                التفاصيل" %}</span>
+                            <span class="text-xs font-black uppercase tracking-widest text-primary">
+                                {% blocktrans %}عرض التفاصيل{% endblocktrans %}
+                            </span>
                             <i
                                 class="ph-bold ph-arrow-right rtl:ph-arrow-left text-primary group-hover:translate-x-2 transition-transform"></i>
                         </div>
                     </div>
                 </a>
                 {% empty %}
-                <p class="text-gray-500 col-span-full font-bold">{% trans "لا توجد منتجات في هذا القسم حالياً." %}</p>
+                <p class="text-gray-500 col-span-full font-bold">
+                    {% blocktrans %}لا توجد منتجات في هذا القسم حالياً.{% endblocktrans %}
+                </p>
                 {% endfor %}
             </div>
         </div>
         {% empty %}
         <div class="text-center py-20">
             <i class="ph-bold ph-magnifying-glass text-6xl text-gray-300 mb-6"></i>
-            <p class="text-gray-500 font-bold">{% trans "لم يتم إضافة أي منتجات بعد." %}</p>
+            <p class="text-gray-500 font-bold">
+                {% blocktrans %}لم يتم إضافة أي منتجات بعد.{% endblocktrans %}
+            </p>
         </div>
         {% endfor %}
+
+        <!-- Pagination -->
+        {% if is_paginated %}
+        <div class="mt-20 flex justify-center gap-4">
+            {% if page_obj.has_previous %}
+            <a href="?page={{ page_obj.previous_page_number }}"
+                class="w-12 h-12 flex items-center justify-center rounded-xl border border-gray-200 dark:border-gray-800 hover:bg-primary hover:border-primary hover:text-white transition-all">
+                <i class="ph-bold ph-caret-left rtl:ph-caret-right"></i>
+            </a>
+            {% endif %}
+
+            <div class="flex items-center gap-2">
+                {% for i in paginator.page_range %}
+                {% if page_obj.number == i %}
+                <span
+                    class="w-12 h-12 flex items-center justify-center rounded-xl bg-primary text-white font-black hover:scale-105 transition-all">
+                    {{ i }}
+                </span>
+                {% else %}
+                <a href="?page={{ i }}"
+                    class="w-12 h-12 flex items-center justify-center rounded-xl border border-gray-200 dark:border-gray-800 hover:bg-primary hover:border-primary hover:text-white transition-all font-bold">
+                    {{ i }}
+                </a>
+                {% endif %}
+                {% endfor %}
+            </div>
+
+            {% if page_obj.has_next %}
+            <a href="?page={{ page_obj.next_page_number }}"
+                class="w-12 h-12 flex items-center justify-center rounded-xl border border-gray-200 dark:border-gray-800 hover:bg-primary hover:border-primary hover:text-white transition-all">
+                <i class="ph-bold ph-caret-right rtl:ph-caret-left"></i>
+            </a>
+            {% endif %}
+        </div>
+        {% endif %}
     </div>
 </section>
 {% endblock %}

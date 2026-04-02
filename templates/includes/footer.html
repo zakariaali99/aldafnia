@@ -5,29 +5,34 @@
         <div class="grid grid-cols-1 md:grid-cols-4 gap-12 mb-12">
             <div class="col-span-1 md:col-span-1">
                 <a href="{% url 'core:home' %}" class="flex items-center gap-3 mb-6 group">
-                    <img src="{% static 'images/logo.png' %}" alt="Aldafnia Logo" class="h-10 w-auto object-contain">
+                    <img src="{% static 'images/logo.png' %}" alt="Aldafnia Logo"
+                        class="h-10 w-auto object-contain transition-transform group-hover:scale-110">
                     <span
                         class="text-xl font-extrabold tracking-tight text-primary dark:text-primary-dark font-almarai">
                         الدافنية <span class="text-secondary dark:text-secondary-dark font-inter">ALDAFNIA</span>
                     </span>
                 </a>
-                <p class="text-gray-500 dark:text-gray-400 text-sm leading-relaxed mb-6 font-cairo">
-                    {% blocktrans %}
-                    مصنع الدافنية للأنابيب هو الرائد في ليبيا في إنتاج أنابيب البولي إيثيلين عالي الكثافة (HDPE) بأحدث
-                    التقنيات العالمية.
-                    {% endblocktrans %}
+                <p class="text-gray-500 dark:text-gray-400 text-sm leading-relaxed mb-6 font-bold">
+                    {% blocktrans %}مصنع الدافنية للأنابيب هو الرائد في ليبيا في إنتاج أنابيب البولي إيثيلين عالي
+                    الكثافة (HDPE) بأحدث التقنيات العالمية.{% endblocktrans %}
                 </p>
                 <div class="flex space-x-4 rtl:space-x-reverse">
-                    <a href="#" class="text-gray-400 hover:text-primary transition-colors text-xl"><i
-                            class="ph-bold ph-facebook-logo"></i></a>
-                    <a href="#" class="text-gray-400 hover:text-primary transition-colors text-xl"><i
-                            class="ph-bold ph-linkedin-logo"></i></a>
-                    <a href="#" class="text-gray-400 hover:text-primary transition-colors text-xl"><i
-                            class="ph-bold ph-instagram-logo"></i></a>
+                    <a href="#"
+                        class="w-10 h-10 rounded-xl bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-800 flex items-center justify-center text-gray-400 hover:text-white hover:bg-primary hover:border-primary transition-all text-xl shadow-sm hover:shadow-lg hover:shadow-primary/20">
+                        <i class="ph-bold ph-facebook-logo"></i>
+                    </a>
+                    <a href="#"
+                        class="w-10 h-10 rounded-xl bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-800 flex items-center justify-center text-gray-400 hover:text-white hover:bg-primary hover:border-primary transition-all text-xl shadow-sm hover:shadow-lg hover:shadow-primary/20">
+                        <i class="ph-bold ph-linkedin-logo"></i>
+                    </a>
+                    <a href="#"
+                        class="w-10 h-10 rounded-xl bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-800 flex items-center justify-center text-gray-400 hover:text-white hover:bg-primary hover:border-primary transition-all text-xl shadow-sm hover:shadow-lg hover:shadow-primary/20">
+                        <i class="ph-bold ph-instagram-logo"></i>
+                    </a>
                 </div>
             </div>
             <div>
-                <h4 class="text-sm font-black uppercase tracking-widest text-primary dark:text-primary-dark mb-6">
+                <h4 class="text-xs font-black uppercase tracking-widest text-primary mb-6">
                     {% blocktrans %}روابط سريعة{% endblocktrans %}
                 </h4>
                 <ul class="space-y-4 text-sm font-bold">
@@ -50,22 +55,26 @@
                 </ul>
             </div>
             <div>
-                <h4 class="text-sm font-black uppercase tracking-widest text-primary dark:text-primary-dark mb-6">
-                    {% blocktrans %}منتجاتنا{% endblocktrans %}
+                <h4 class="text-xs font-black uppercase tracking-widest text-primary mb-6">
+                    {% blocktrans %}المركز الإعلامي{% endblocktrans %}
                 </h4>
                 <ul class="space-y-4 text-sm font-bold">
-                    <li><a href="{% url 'products:list' %}"
+                    <li><a href="{% url 'media_center:news_list' %}"
                             class="text-gray-500 hover:text-primary dark:text-gray-400 dark:hover:text-primary-dark transition-colors">
-                            {% blocktrans %}أنابيب HDPE{% endblocktrans %}
+                            {% blocktrans %}آخر الأخبار{% endblocktrans %}
                         </a></li>
-                    <li><a href="{% url 'products:list' %}"
+                    <li><a href="{% url 'media_center:certificates' %}"
                             class="text-gray-500 hover:text-primary dark:text-gray-400 dark:hover:text-primary-dark transition-colors">
-                            {% blocktrans %}أنابيب ري بالتنقيط{% endblocktrans %}
+                            {% blocktrans %}الشهادات والاعتمادات{% endblocktrans %}
+                        </a></li>
+                    <li><a href="{% url 'core:design_system' %}"
+                            class="text-gray-500 hover:text-primary dark:text-gray-400 dark:hover:text-primary-dark transition-colors">
+                            {% blocktrans %}نظام التصميم{% endblocktrans %}
                         </a></li>
                 </ul>
             </div>
             <div>
-                <h4 class="text-sm font-black uppercase tracking-widest text-primary dark:text-primary-dark mb-6">
+                <h4 class="text-xs font-black uppercase tracking-widest text-primary mb-6">
                     {% blocktrans %}تواصل معنا{% endblocktrans %}
                 </h4>
                 <ul class="space-y-4 text-sm font-bold text-gray-500">
@@ -77,15 +86,27 @@
                     </li>
                     <li class="flex items-center gap-3 font-inter">
                         <i class="ph-bold ph-phone text-primary text-xl"></i>
-                        <span>+218 91 000 0000</span>
+                        <span>+218 91 324 1428</span>
+                    </li>
+                    <li class="flex items-center gap-3 font-inter">
+                        <i class="ph-bold ph-envelope text-primary text-xl"></i>
+                        <span>info@aldafnia.ly</span>
                     </li>
                 </ul>
             </div>
         </div>
         <div
             class="border-t border-gray-200 dark:border-gray-900 pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
-            <p class="text-xs text-gray-500 dark:text-gray-400 font-inter">&copy; {% now "Y" %} ALDAFNIA FACTORY. ALL
-                RIGHTS RESERVED.</p>
+            <p class="text-[10px] font-black tracking-[0.2em] text-gray-400 font-inter uppercase">&copy; {% now "Y" %}
+                ALDAFNIA FACTORY. INNOVATING LIBYAN INFRASTRUCTURE.</p>
+            <div class="flex items-center gap-6">
+                <a href="#"
+                    class="text-[10px] font-black text-gray-400 hover:text-primary transition-colors uppercase tracking-widest">Privacy
+                    Policy</a>
+                <a href="#"
+                    class="text-[10px] font-black text-gray-400 hover:text-primary transition-colors uppercase tracking-widest">Terms
+                    of Service</a>
+            </div>
         </div>
     </div>
 </footer>

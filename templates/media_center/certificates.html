@@ -1,14 +1,21 @@
 {% extends 'base.html' %}
 {% load i18n static %}
 
-{% block title %}{% trans "الشهادات والاعتمادات | مصنع الدافنية" %}{% endblock %}
+{% block title %}
+{% blocktrans %}الشهادات والاعتمادات | مصنع الدافنية{% endblocktrans %}
+{% endblock %}
 
 {% block content %}
 <section class="py-20 bg-gray-950 text-white text-center">
     <div class="container mx-auto px-4">
-        <h1 class="text-5xl md:text-7xl font-black mb-6">{% trans "جودة عالمية معتمدة" %}</h1>
-        <p class="text-xl text-gray-400 max-w-2xl mx-auto font-bold">{% trans "نلتزم بأعلى معايير إدارة الجودة والبيئة
-            والسلامة المهنية لضمان أفضل المخرجات." %}</p>
+        <h1 class="text-5xl md:text-7xl font-black mb-6">
+            {% blocktrans %}جودة عالمية معتمدة{% endblocktrans %}
+        </h1>
+        <p class="text-xl text-gray-400 max-w-2xl mx-auto font-bold">
+            {% blocktrans %}
+            نلتزم بأعلى معايير إدارة الجودة والبيئة والسلامة المهنية لضمان أفضل المخرجات.
+            {% endblocktrans %}
+        </p>
     </div>
 </section>
 
@@ -35,10 +42,47 @@
             </div>
             {% empty %}
             <div class="col-span-full text-center py-20">
-                <p class="text-gray-500 font-bold">{% trans "سيتم إضافة الشهادات قريباً." %}</p>
+                <p class="text-gray-500 font-bold">
+                    {% blocktrans %}سيتم إضافة الشهادات قريباً.{% endblocktrans %}
+                </p>
             </div>
             {% endfor %}
         </div>
+
+        <!-- Pagination -->
+        {% if is_paginated %}
+        <div class="mt-20 flex justify-center gap-4">
+            {% if page_obj.has_previous %}
+            <a href="?page={{ page_obj.previous_page_number }}"
+                class="w-12 h-12 flex items-center justify-center rounded-xl border border-gray-200 dark:border-gray-800 hover:bg-primary hover:border-primary hover:text-white transition-all">
+                <i class="ph-bold ph-caret-left rtl:ph-caret-right"></i>
+            </a>
+            {% endif %}
+
+            <div class="flex items-center gap-2">
+                {% for i in paginator.page_range %}
+                {% if page_obj.number == i %}
+                <span
+                    class="w-12 h-12 flex items-center justify-center rounded-xl bg-primary text-white font-black hover:scale-105 transition-all">
+                    {{ i }}
+                </span>
+                {% else %}
+                <a href="?page={{ i }}"
+                    class="w-12 h-12 flex items-center justify-center rounded-xl border border-gray-200 dark:border-gray-800 hover:bg-primary hover:border-primary hover:text-white transition-all font-bold">
+                    {{ i }}
+                </a>
+                {% endif %}
+                {% endfor %}
+            </div>
+
+            {% if page_obj.has_next %}
+            <a href="?page={{ page_obj.next_page_number }}"
+                class="w-12 h-12 flex items-center justify-center rounded-xl border border-gray-200 dark:border-gray-800 hover:bg-primary hover:border-primary hover:text-white transition-all">
+                <i class="ph-bold ph-caret-right rtl:ph-caret-left"></i>
+            </a>
+            {% endif %}
+        </div>
+        {% endif %}
     </div>
 </section>
 {% endblock %}

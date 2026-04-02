@@ -13,8 +13,9 @@
         </nav>
 
         <header class="space-y-8 mb-16 text-center">
-            <div class="text-sm font-black text-primary uppercase tracking-widest font-inter">{{
-                article.published_date|date:"d F Y" }}</div>
+            <div class="text-sm font-black text-primary uppercase tracking-widest font-inter">
+                {{ article.published_date|date:"d F Y" }}
+            </div>
             <h1 class="text-4xl md:text-6xl font-black text-gray-900 dark:text-white leading-tight">
                 {{ article.title }}
             </h1>

@@ -33,7 +33,6 @@ ALLOWED_HOSTS = env.list('ALLOWED_HOSTS', default=['*'])
 
 # Application definition
 INSTALLED_APPS = [
-    'modeltranslation',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -52,6 +51,7 @@ INSTALLED_APPS = [
     'products',
     'projects',
     'media_center',
+    'dashboard',
 ]
 
 TAILWIND_APP_NAME = 'theme'
@@ -63,7 +63,6 @@ INTERNAL_IPS = [
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
-    'django.middleware.locale.LocaleMiddleware',  # i18n
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
@@ -107,25 +106,13 @@ AUTH_PASSWORD_VALIDATORS = [
 ]
 
 # Internationalization
-LANGUAGE_CODE = 'ar'  # Default language is Arabic
+LANGUAGE_CODE = 'ar'  # Only Arabic
 
 TIME_ZONE = 'Africa/Tripoli'
 
-USE_I18N = True
+USE_I18N = False
 USE_L10N = True
 USE_TZ = True
-
-LANGUAGES = (
-    ('ar', _('Arabic')),
-    ('en', _('English')),
-)
-
-MODELTRANSLATION_DEFAULT_LANGUAGE = 'ar'
-MODELTRANSLATION_LANGUAGES = ('ar', 'en')
-
-LOCALE_PATHS = (
-    BASE_DIR / 'locale/',
-)
 
 # Static files (CSS, JavaScript, Images)
 STATIC_URL = 'static/'
@@ -137,3 +124,8 @@ MEDIA_ROOT = BASE_DIR / 'media'
 
 # Default primary key field type
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+# Authentication
+LOGIN_URL = 'dashboard:login'
+LOGIN_REDIRECT_URL = 'dashboard:index'
+LOGOUT_REDIRECT_URL = 'core:home'
